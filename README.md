@@ -38,6 +38,39 @@ Using the `docker-compose` command
       && sudo docker build -t viljaste/vault:latest . \
       && cd -
 
+## Configuration
+
+### Supported backends
+
+#### File
+
+    BACKEND=file
+    
+#### Consul
+
+    BACKEND=consul
+    
+##### Configurable options
+
+    BACKEND_CONSUL_PATH=
+    BACKEND_CONSUL_ADDRESS=
+    BACKEND_CONSUL_SCHEME=
+    BACKEND_CONSUL_DATACENTER=
+    BACKEND_CONSUL_TOKEN=
+
+#### Zookeeper
+
+    BACKEND=zookeeper    
+    
+##### Configurable options
+
+    BACKEND_ZOOKEEPER_PATH=
+    BACKEND_ZOOKEEPER_ADDRESS=
+    
+#### In-memory
+
+    BACKEND=inmem
+
 ## License
 
 **MIT**
