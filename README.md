@@ -18,6 +18,7 @@ Using the `docker` command:
       -p 8200:8200 \
       --volumes-from vaultdata \
       -e SERVER_NAME="localhost" \
+      -e BACKEND="file" \
       --cap-add IPC_LOCK \
       -d \
       viljaste/vault:latest

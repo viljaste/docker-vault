@@ -7,6 +7,7 @@ vault:
     - vaultdata
   environment:
     - SERVER_NAME=localhost
+    - BACKEND=file
   cap_add:
     - IPC_LOCK
 vaultdata:

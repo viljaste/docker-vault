@@ -1,7 +1,37 @@
-backend "consul" {
-  address = "demo.consul.io:80"
-  path = "vault"
+<% if @backend == "file" %>
+backend "file" {
+  path = "/vault/data"
 }
+<% elsif @backend == "consul" %>
+backend "consul" {
+<% if !@backend_consul_path.empty? %>
+  path = "<%= @backend_consul_path %>"
+<% end %>
+<% if !@backend_consul_address.empty? %>
+  address = "<%= @backend_consul_address %>"
+<% end %>
+<% if !@backend_consul_scheme.empty? %>
+  scheme = "<%= @backend_consul_scheme %>"
+<% end %>
+<% if !@backend_consul_datacenter.empty? %>
+  datacenter = "<%= @backend_consul_datacenter %>"
+<% end %>
+<% if !@backend_consul_token.empty? %>
+  token = "<%= @backend_consul_token %>"
+<% end %>
+}
+<% elsif @backend == "zookeeper" %>
+backend "zookeeper" {
+<% if !@backend_zookeeper_path.empty? %>
+  path = "<%= @backend_zookeeper_path %>"
+<% end %>
+<% if !@backend_zookeeper_address.empty? %>
+  address = "<%= @backend_zookeeper_address %>"
+<% end %>
+}
+<% elsif @backend == "inmem" %>
+backend "inmem" { }
+<% end %>
 
 listener "tcp" {
   address = "0.0.0.0:8200"
