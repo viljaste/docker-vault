@@ -1,0 +1,12 @@
+vault:
+  image: viljaste/vault:latest
+  hostname: vault
+  ports:
+    - "8200:8200"
+  volumes_from:
+    - vaultdata
+vaultdata:
+  image: viljaste/data:latest
+  hostname: vaultdata
+  volumes:
+    - /vault
