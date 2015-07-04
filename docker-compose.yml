@@ -5,6 +5,10 @@ vault:
     - "8200:8200"
   volumes_from:
     - vaultdata
+  environment:
+    - SERVER_NAME=localhost
+  cap_add:
+    - IPC_LOCK
 vaultdata:
   image: viljaste/data:latest
   hostname: vaultdata

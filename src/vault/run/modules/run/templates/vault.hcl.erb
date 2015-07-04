@@ -1,0 +1,10 @@
+backend "consul" {
+  address = "demo.consul.io:80"
+  path = "vault"
+}
+
+listener "tcp" {
+  address = "0.0.0.0:8200"
+  tls_cert_file = "/vault/ssl/certs/vault.crt"
+  tls_key_file = "/vault/ssl/private/vault.key"
+}
