@@ -39,6 +39,10 @@ Using the `docker-compose` command
       && sudo docker build -t viljaste/vault:latest . \
       && cd -
 
+## Initializing the vault
+
+    vault init -tls-skip-verify -address https://example.org:8200
+
 ## Configuration
 
 ### Supported backends
