@@ -1,6 +1,7 @@
 vault:
   image: viljaste/vault:latest
   hostname: vault
+  restart: always
   ports:
     - "8200:8200"
   volumes_from:

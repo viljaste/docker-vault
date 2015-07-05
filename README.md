@@ -15,6 +15,7 @@ Using the `docker` command:
     CONTAINER="vault" && sudo docker run \
       --name "${CONTAINER}" \
       -h "${CONTAINER}" \
+      --restart always \
       -p 8200:8200 \
       --volumes-from vaultdata \
       -e SERVER_NAME="localhost" \
