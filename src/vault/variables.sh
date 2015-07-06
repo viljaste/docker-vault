@@ -59,3 +59,13 @@ if [ -z "${BACKEND_ZOOKEEPER_ADDRESS}" ]; then
 fi
 
 export FACTER_BACKEND_ZOOKEEPER_ADDRESS="${BACKEND_ZOOKEEPER_ADDRESS}"
+
+if [ -n "${CONSUL_PORT_8500_TCP}" ]; then
+  CONSUL_HOST="$(echo "${CONSUL_PORT_8500_TCP}" | sed 's/tcp:\/\///')"
+
+  CONSUL_HOST="$(echo "${CONSUL_HOST}" | cut -d ":" -f1)"
+  CONSUL_PORT="$(echo "${CONSUL_HOST}" | cut -d ":" -f2)"
+
+  export FACTER_BACKEND="consul"
+  export FACTER_BACKEND_CONSUL_ADDRESS="${CONSUL_HOST}:${CONSUL_PORT}"
+fi
