@@ -76,6 +76,61 @@ Using the `docker-compose` command
 
     BACKEND=inmem
 
+### Connecting to Consul backend by linking Vault with Consul container
+
+    vault:
+      image: viljaste/vault:latest
+      hostname: vault
+      restart: always
+      ports:
+        - "8200:8200"
+      volumes_from:
+        - vaultdata
+      links:
+        - consul
+      environment:
+        - SERVER_NAME=localhost
+      cap_add:
+        - IPC_LOCK
+    vaultdata:
+      image: viljaste/data:latest
+      hostname: vaultdata
+      volumes:
+        - /vault
+    consul:
+      image: viljaste/consul:latest
+      hostname: consul
+      restart: always
+      ports:
+        - "8300:8300"
+        - "8301:8301"
+        - "8301:8301/udp"
+        - "8302:8302"
+        - "8302:8302/udp"
+        - "8400:8400"
+        - "8500:8500"
+        - "8600:8600"
+        - "8600:8600/udp"
+      volumes_from:
+        - consuldata
+      links:
+        - conntrack
+      environment:
+        - ADVERTISE_ADDR=10.0.0.1
+        - RETRY_JOIN=10.0.0.2
+    consuldata:
+      image: viljaste/data:latest
+      hostname: consuldata
+      volumes:
+        - /consul
+    conntrack:
+      image: viljaste/conntrack:latest
+      hostname: conntrack
+      command: -F
+      net: "host"
+      cap_add:
+        - NET_ADMIN
+
 ## License
 
 **MIT**
